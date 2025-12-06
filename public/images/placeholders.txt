@@ -1,0 +1,10 @@
+# Placeholder images for medical specialties
+# These are fallback images in case external URLs fail
+
+## Default Doctor Image
+# A professional doctor placeholder image
+DOCTOR_PLACEHOLDER=https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=250&fit=crop&crop=center
+
+## Default Specialty Image
+# A general medical placeholder
+SPECIALTY_PLACEHOLDER=https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center

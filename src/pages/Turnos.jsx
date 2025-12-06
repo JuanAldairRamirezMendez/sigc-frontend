@@ -104,7 +104,7 @@ export default function Turnos() {
               src={
                 doc.imagen
                   ? `${API_URL}/doctores/imagen/${doc.imagen}`
-                  : "https://picsum.photos/200/250?random=1"
+                  : "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=250&fit=crop&crop=center"
               }
               alt={doc.nombre}
               className="card-img-top"
@@ -114,7 +114,7 @@ export default function Turnos() {
                 borderTopLeftRadius: "10px",
                 borderTopRightRadius: "10px",
               }}
-              onError={(e) => (e.target.src = "https://picsum.photos/200/250?random=2")}
+              onError={(e) => (e.target.src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=250&fit=crop&crop=center")}
             />
             <div className="card-body text-center">
               <h5 className="fw-bold text-green-700">{doc.nombre}</h5>

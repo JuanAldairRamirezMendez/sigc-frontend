@@ -205,7 +205,7 @@ export default function TurnosMejorado() {
                         src={
                           doc.imagen
                             ? `${API_URL}/doctores/imagen/${doc.imagen}`
-                            : "https://picsum.photos/200/200?random=1"
+                            : "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop&crop=center"
                         }
                         alt={doc.nombre}
                         className="card-img-top"
@@ -213,7 +213,7 @@ export default function TurnosMejorado() {
                           objectFit: "cover",
                           height: "200px",
                         }}
-                        onError={(e) => (e.target.src = "https://picsum.photos/200/200?random=2")}
+                        onError={(e) => (e.target.src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop&crop=center")}
                       />
                       <div className="card-body text-center">
                         <h5 className="fw-bold text-dark">{doc.nombre}</h5>

@@ -8,6 +8,22 @@ import { SectionErrorBoundary } from "../components/loading/ErrorBoundaries";
 import { useAsyncOperation } from "../hooks/useAsyncOperations";
 import "../styles/Especialidades.css";
 
+// Función para obtener imagen apropiada para cada especialidad
+const getEspecialidadImage = (nombre) => {
+  const images = {
+    "Medicina General": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center",
+    "Cardiología": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&h=300&fit=crop&crop=center",
+    "Neurología": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center",
+    "Pediatría": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=300&fit=crop&crop=center",
+    "Ginecología": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center",
+    "Dermatología": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop&crop=center",
+    "Oftalmología": "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=300&fit=crop&crop=center",
+    "Traumatología": "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=300&fit=crop&crop=center"
+  };
+
+  return images[nombre] || "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center";
+};
+
 export default function Especialidades() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const navigate = useNavigate();
@@ -85,22 +101,14 @@ export default function Especialidades() {
         {especialidades.map((esp) => (
           <div key={esp.idEspecialidad} className="card-especialidad">
             <div className="img-wrapper">
-              {esp.imagen ? (
-                <img
-                  src={`${API_URL}/images/especialidades/${esp.imagen}`}
-                  alt={esp.nombre}
-                  className="img-especialidad"
-                  onError={(e) => {
-                    e.target.src = "https://via.placeholder.com/200x150?text=Sin+Foto";
-                  }}
-                />
-              ) : (
-                <img
-                  src="https://via.placeholder.com/200x150?text=Sin+Foto"
-                  alt="Sin imagen"
-                  className="img-especialidad"
-                />
-              )}
+              <img
+                src={esp.imagen ? `${API_URL}/images/especialidades/${esp.imagen}` : getEspecialidadImage(esp.nombre)}
+                alt={esp.nombre}
+                className="img-especialidad"
+                onError={(e) => {
+                  e.target.src = getEspecialidadImage(esp.nombre);
+                }}
+              />
             </div>
             <h3>{esp.nombre}</h3>
             <p>{esp.descripcion}</p>
