@@ -16,12 +16,53 @@ const getEspecialidadImage = (nombre) => {
     "Neurología": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center",
     "Pediatría": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=300&fit=crop&crop=center",
     "Ginecología": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center",
-    "Dermatología": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop&crop=center",
+    "Dermatología": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop&crop=center",
     "Oftalmología": "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=300&fit=crop&crop=center",
     "Traumatología": "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=300&fit=crop&crop=center"
   };
 
-  return images[nombre] || "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center";
+  const imageUrl = images[nombre] || "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center";
+  console.log(`🖼️ Imagen para ${nombre}: ${imageUrl}`);
+  return imageUrl;
+};
+
+// Componente de imagen con manejo de errores robusto
+const EspecialidadImage = ({ especialidad, className }) => {
+  const [currentImage, setCurrentImage] = useState(null);
+  const [hasTriedFallback, setHasTriedFallback] = useState(false);
+
+  useEffect(() => {
+    // Inicializar con la imagen del backend o la especialidad
+    const backendImage = especialidad.imagen ? `${API_URL}/images/especialidades/${especialidad.imagen}` : null;
+    setCurrentImage(backendImage || getEspecialidadImage(especialidad.nombre));
+    setHasTriedFallback(false);
+  }, [especialidad]);
+
+  const handleImageError = () => {
+    if (!hasTriedFallback) {
+      // Intentar con la imagen de especialidad si falló la del backend
+      if (especialidad.imagen) {
+        setCurrentImage(getEspecialidadImage(especialidad.nombre));
+        setHasTriedFallback(true);
+      } else {
+        // Si ya estamos en la imagen de especialidad, intentar con el fallback
+        setCurrentImage(getFallbackImage(especialidad.nombre));
+        setHasTriedFallback(true);
+      }
+    } else {
+      // Si ya intentamos el fallback, usar la imagen por defecto final
+      setCurrentImage("https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center");
+    }
+  };
+
+  return (
+    <img
+      src={currentImage}
+      alt={especialidad.nombre}
+      className={className}
+      onError={handleImageError}
+    />
+  );
 };
 
 export default function Especialidades() {
@@ -101,13 +142,9 @@ export default function Especialidades() {
         {especialidades.map((esp) => (
           <div key={esp.idEspecialidad} className="card-especialidad">
             <div className="img-wrapper">
-              <img
-                src={esp.imagen ? `${API_URL}/images/especialidades/${esp.imagen}` : getEspecialidadImage(esp.nombre)}
-                alt={esp.nombre}
+              <EspecialidadImage
+                especialidad={esp}
                 className="img-especialidad"
-                onError={(e) => {
-                  e.target.src = getEspecialidadImage(esp.nombre);
-                }}
               />
             </div>
             <h3>{esp.nombre}</h3>
