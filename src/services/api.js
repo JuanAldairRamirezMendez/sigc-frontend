@@ -366,4 +366,5 @@ export const horariosAPI = {
   }
 };
 
+export { API_URL };
 export default api;

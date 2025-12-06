@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
+import api, { API_URL } from "../services/api";
 import PublicLayout from "../layouts/PublicLayout";
 import ClienteLayout from "../layouts/ClienteLayout";
 import { CardSkeleton, EmptyState, RetryComponent } from "../components/loading/LoadingComponents";
@@ -87,7 +87,7 @@ export default function Especialidades() {
             <div className="img-wrapper">
               {esp.imagen ? (
                 <img
-                  src={`http://localhost:8080/images/especialidades/${esp.imagen}`}
+                  src={`${API_URL}/images/especialidades/${esp.imagen}`}
                   alt={esp.nombre}
                   className="img-especialidad"
                   onError={(e) => {

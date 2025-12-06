@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AdminLayout from "../layouts/AdminLayout";
-import api from "../services/api";
+import api, { API_URL } from "../services/api";
 
 export default function AdminEspecialidades() {
   const [especialidades, setEspecialidades] = useState([]);
@@ -159,7 +159,7 @@ export default function AdminEspecialidades() {
                 <td>
                   {esp.imagen ? (
                     <img
-                      src={`http://localhost:8080/images/especialidades/${esp.imagen}`}
+                      src={`${API_URL}/images/especialidades/${esp.imagen}`}
                       alt={esp.nombre}
                       style={{
                         width: "70px",

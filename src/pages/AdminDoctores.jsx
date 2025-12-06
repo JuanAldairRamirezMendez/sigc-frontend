@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { doctoresAPI, especialidadesAPI } from "../services/api";
-import api from "../services/api";
+import api, { API_URL } from "../services/api";
 import AdminLayout from "../layouts/AdminLayout";
 import "../styles/AdminDoctores.css";
 
@@ -275,7 +275,7 @@ export default function AdminDoctores() {
               if (doc.imagen.startsWith('data:')) {
                 imagenUrl = doc.imagen; // Es base64
               } else if (!usarMock) {
-                imagenUrl = `http://localhost:8080/doctores/imagen/${doc.imagen}`;
+                imagenUrl = `${API_URL}/doctores/imagen/${doc.imagen}`;
               }
             }
             

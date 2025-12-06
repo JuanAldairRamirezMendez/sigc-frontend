@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import PublicLayout from "../layouts/PublicLayout";
 import ClienteLayout from "../layouts/ClienteLayout";
-import api from "../services/api";
+import api, { API_URL } from "../services/api";
 import { showSuccess, showWarning, showError, showConfirm } from "../utils/alerts";
 
 export default function Turnos() {
@@ -103,8 +103,8 @@ export default function Turnos() {
             <img
               src={
                 doc.imagen
-                  ? `http://localhost:8080/doctores/imagen/${doc.imagen}`
-                  : "https://via.placeholder.com/200x250?text=Sin+Foto"
+                  ? `${API_URL}/doctores/imagen/${doc.imagen}`
+                  : "https://picsum.photos/200/250?random=1"
               }
               alt={doc.nombre}
               className="card-img-top"
@@ -114,7 +114,7 @@ export default function Turnos() {
                 borderTopLeftRadius: "10px",
                 borderTopRightRadius: "10px",
               }}
-              onError={(e) => (e.target.src = "https://via.placeholder.com/200x250/6c757d/ffffff?text=Sin+Foto")}
+              onError={(e) => (e.target.src = "https://picsum.photos/200/250?random=2")}
             />
             <div className="card-body text-center">
               <h5 className="fw-bold text-green-700">{doc.nombre}</h5>

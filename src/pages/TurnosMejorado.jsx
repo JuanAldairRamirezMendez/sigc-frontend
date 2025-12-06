@@ -8,7 +8,7 @@ import ClienteLayout from "../layouts/ClienteLayout";
 import { CardSkeleton, LoadingSpinner, EmptyState, ButtonLoading } from "../components/loading/LoadingComponents";
 import { SectionErrorBoundary } from "../components/loading/ErrorBoundaries";
 import { useAsyncOperation, useFormSubmit } from "../hooks/useAsyncOperations";
-import api from "../services/api";
+import api, { API_URL } from "../services/api";
 import { showSuccess, showWarning, showError } from "../utils/alerts";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -204,8 +204,8 @@ export default function TurnosMejorado() {
                       <img
                         src={
                           doc.imagen
-                            ? `http://localhost:8080/doctores/imagen/${doc.imagen}`
-                            : "https://via.placeholder.com/200x250?text=Sin+Foto"
+                            ? `${API_URL}/doctores/imagen/${doc.imagen}`
+                            : "https://picsum.photos/200/200?random=1"
                         }
                         alt={doc.nombre}
                         className="card-img-top"
@@ -213,7 +213,7 @@ export default function TurnosMejorado() {
                           objectFit: "cover",
                           height: "200px",
                         }}
-                        onError={(e) => (e.target.src = "https://via.placeholder.com/200x200/6c757d/ffffff?text=Sin+Foto")}
+                        onError={(e) => (e.target.src = "https://picsum.photos/200/200?random=2")}
                       />
                       <div className="card-body text-center">
                         <h5 className="fw-bold text-dark">{doc.nombre}</h5>
