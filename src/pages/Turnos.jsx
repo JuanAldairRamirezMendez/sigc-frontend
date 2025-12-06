@@ -114,7 +114,7 @@ export default function Turnos() {
                 borderTopLeftRadius: "10px",
                 borderTopRightRadius: "10px",
               }}
-              onError={(e) => (e.target.src = "/default.png")}
+              onError={(e) => (e.target.src = "https://via.placeholder.com/200x250/6c757d/ffffff?text=Sin+Foto")}
             />
             <div className="card-body text-center">
               <h5 className="fw-bold text-green-700">{doc.nombre}</h5>

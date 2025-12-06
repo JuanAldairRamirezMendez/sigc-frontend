@@ -213,7 +213,7 @@ export default function TurnosMejorado() {
                           objectFit: "cover",
                           height: "200px",
                         }}
-                        onError={(e) => (e.target.src = "/default.png")}
+                        onError={(e) => (e.target.src = "https://via.placeholder.com/200x200/6c757d/ffffff?text=Sin+Foto")}
                       />
                       <div className="card-body text-center">
                         <h5 className="fw-bold text-dark">{doc.nombre}</h5>
