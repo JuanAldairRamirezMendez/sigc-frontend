@@ -77,7 +77,7 @@ const normalizarDoctores = (doctores) => {
 
 const api = axios.create({
   baseURL: API_URL,
-  timeout: 10000,
+  timeout: 30000, // Increased from 10000 to 30000 for Render cold starts
   headers: {
     "Content-Type": "application/json",
   },
